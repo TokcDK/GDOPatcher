@@ -240,6 +240,18 @@ namespace GDOPatcher
                     }
                 }
 
+                //Redguard
+                if (armor != null && (armor.NamedFieldsContain("Redguard") || armor.NamedFieldsContain("Hammerfell") || armor.NamedFieldsContain("Alik'r")))
+                {
+
+                    var armorPatch = state.PatchMod.Armors.GetOrAddAsOverride(armor);
+                    if (armorPatch.Keywords != null)
+                    {
+                        armorPatch.Keywords.Add(SPIKERedguardMerc.FormKey);
+                        armorCount++;
+                    }
+                }
+
                 //Scaled armor
                 if (armor != null && armor.HasKeyword(Skyrim.Keyword.ArmorMaterialScaled.FormKey))
                 {
@@ -297,6 +309,18 @@ namespace GDOPatcher
                     if (armorPatch.Keywords != null)
                     {
                         armorPatch.Keywords.Add(SPIKEArmorSonsBear.FormKey);
+                        armorCount++;
+                    }
+                }
+
+                //Studded
+                if (armor != null && armor.HasKeyword(Skyrim.Keyword.ArmorMaterialStudded.FormKey))
+                {
+
+                    var armorPatch = state.PatchMod.Armors.GetOrAddAsOverride(armor);
+                    if (armorPatch.Keywords != null)
+                    {
+                        armorPatch.Keywords.Add(SPIKEArmorBrigand.FormKey);
                         armorCount++;
                     }
                 }
