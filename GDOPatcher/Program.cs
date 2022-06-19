@@ -87,6 +87,9 @@ namespace GDOPatcher
             {
                 if (armor != null && armor.BodyTemplate != null && !armor.BodyTemplate.FirstPersonFlags.HasFlag(BipedObjectFlag.Body)) continue;
 
+                //Removing Non-Playable Armors
+                if (armor != null && armor.MajorFlags.HasFlag(Armor.MajorFlag.NonPlayable)) continue;
+
                 //Removing Templated Armors
                 if (armor != null && !armor.TemplateArmor.IsNull) continue;
 
@@ -323,6 +326,150 @@ namespace GDOPatcher
                 }
             }
             Console.WriteLine(armorCount + " Armors Patched");
+
+            foreach (var weapon in state.LoadOrder.PriorityOrder.OnlyEnabled().Weapon().WinningOverrides())
+            {
+                if (weapon == null) continue;
+
+                //Removing Non-Playable Weapons
+                if (weapon != null && weapon.MajorFlags.HasFlag(Weapon.MajorFlag.NonPlayable)) continue;
+
+                //Removing Templated Weapons
+                if (weapon != null && !weapon.Template.IsNull) continue;
+
+                //Removing Patched Weapons
+                if (weapon != null && (weapon.HasKeyword(SPIKEArmorAssassin) || weapon.HasKeyword(SPIKEArmorBrigand) || weapon.HasKeyword(SPIKEArmorDragonBone) || weapon.HasKeyword(SPIKEArmorDragonScale) || weapon.HasKeyword(SPIKEArmorDwarven) || weapon.HasKeyword(SPIKEArmorEbony) || weapon.HasKeyword(SPIKEArmorFancyBlack) || weapon.HasKeyword(SPIKEArmorImperial) || weapon.HasKeyword(SPIKEArmorImperialScout) || weapon.HasKeyword(SPIKEArmorImperialSecurity) || weapon.HasKeyword(SPIKEArmorIron) || weapon.HasKeyword(SPIKEArmorLeather) || weapon.HasKeyword(SPIKEArmorMerc) || weapon.HasKeyword(SPIKEArmorOrcish) || weapon.HasKeyword(SPIKEArmorScaleShiny) || weapon.HasKeyword(SPIKEArmorSons) || weapon.HasKeyword(SPIKEArmorSonsBear) || weapon.HasKeyword(SPIKEArmorSteel) || weapon.HasKeyword(SPIKEArmorSteelPlate) || weapon.HasKeyword(SPIKEArmorStinksDeath) || weapon.HasKeyword(SPIKEArmorThievesGuild) || weapon.HasKeyword(SPIKEArmorTrueNord) || weapon.HasKeyword(SPIKEArmorWeak) || weapon.HasKeyword(SPIKEGodsBlessings) || weapon.HasKeyword(SPIKEGodsPraised) || weapon.HasKeyword(SPIKEImperialAuxiliary) || weapon.HasKeyword(SPIKEImperialLegate) || weapon.HasKeyword(SPIKEImperialPraefect) || weapon.HasKeyword(SPIKEImperialQuaestor) || weapon.HasKeyword(SPIKEImperialTribune) || weapon.HasKeyword(SPIKERedguardMerc) || weapon.HasKeyword(SPIKEShieldFancyDwarven) || weapon.HasKeyword(SPIKESonsBoneBreaker) || weapon.HasKeyword(SPIKESonsIceVeins) || weapon.HasKeyword(SPIKESonsSnowHammer) || weapon.HasKeyword(SPIKESonsStormblade) || weapon.HasKeyword(SPIKESonsUnblooded) || weapon.HasKeyword(SPIKEStaffHorror) || weapon.HasKeyword(SPIKEWeapBigHammer) || weapon.HasKeyword(SPIKEWeapElvenBlade) || weapon.HasKeyword(SPIKEWeapFancySwordBlack) || weapon.HasKeyword(SPIKEWeapFoul) || weapon.HasKeyword(SPIKEWeapIronSword) || weapon.HasKeyword(SPIKEWeapKillerBlade) || weapon.HasKeyword(SPIKEWeapPigsticker) || weapon.HasKeyword(SPIKEWeapScaryMace) || weapon.HasKeyword(SPIKEWeapSteelSword) || weapon.HasKeyword(SPIKEWeapWickedAxe))) continue;
+
+                //Daedric Greatsword
+                if (weapon != null && weapon.HasKeyword(Skyrim.Keyword.WeapMaterialDaedric) && weapon.HasKeyword(Skyrim.Keyword.WeapTypeGreatsword))
+                {
+                    var weaponPatch = state.PatchMod.Weapons.GetOrAddAsOverride(weapon);
+                    if (weaponPatch.Keywords != null)
+                    {
+                        weaponPatch.Keywords.Add(SPIKEWeapFancySwordBlack);
+                        weaponCount++;
+                    }
+                }
+
+                //Daedric Sword
+                if (weapon != null && weapon.HasKeyword(Skyrim.Keyword.WeapMaterialDaedric) && weapon.HasKeyword(Skyrim.Keyword.WeapTypeSword))
+                {
+                    var weaponPatch = state.PatchMod.Weapons.GetOrAddAsOverride(weapon);
+                    if (weaponPatch.Keywords != null)
+                    {
+                        //Removing Miraak's Sword
+                        if (weapon.FormKey.Equals(Dragonborn.Weapon.DLC2MKMiraakSword1) || weapon.FormKey.Equals(Dragonborn.Weapon.DLC2MKMiraakSword2) || weapon.FormKey.Equals(Dragonborn.Weapon.DLC2MKMiraakSword3)) continue;
+
+                        weaponPatch.Keywords.Add(SPIKEWeapFancySwordBlack);
+                        weaponCount++;
+                    }
+                }
+
+                //Ebony Greatsword
+                if (weapon != null && weapon.HasKeyword(Skyrim.Keyword.WeapMaterialEbony) && weapon.HasKeyword(Skyrim.Keyword.WeapTypeGreatsword))
+                {
+                    var weaponPatch = state.PatchMod.Weapons.GetOrAddAsOverride(weapon);
+                    if (weaponPatch.Keywords != null)
+                    {
+                        weaponPatch.Keywords.Add(SPIKEWeapFancySwordBlack);
+                        weaponCount++;
+                    }
+                }
+
+                //Ebony Sword
+                if (weapon != null && weapon.HasKeyword(Skyrim.Keyword.WeapMaterialEbony) && weapon.HasKeyword(Skyrim.Keyword.WeapTypeSword))
+                {
+                    var weaponPatch = state.PatchMod.Weapons.GetOrAddAsOverride(weapon);
+                    if (weaponPatch.Keywords != null)
+                    {
+                        weaponPatch.Keywords.Add(SPIKEWeapFancySwordBlack);
+                        weaponCount++;
+                    }
+                }
+
+                //Elven Dagger
+                if (weapon != null && weapon.HasKeyword(Skyrim.Keyword.WeapMaterialElven) && weapon.HasKeyword(Skyrim.Keyword.WeapTypeDagger))
+                {
+                    var weaponPatch = state.PatchMod.Weapons.GetOrAddAsOverride(weapon);
+                    if (weaponPatch.Keywords != null)
+                    {
+                        weaponPatch.Keywords.Add(SPIKEWeapElvenBlade);
+                        weaponCount++;
+                    }
+                }
+
+                //Elven Greatsword
+                if (weapon != null && weapon.HasKeyword(Skyrim.Keyword.WeapMaterialElven) && weapon.HasKeyword(Skyrim.Keyword.WeapTypeGreatsword))
+                {
+                    var weaponPatch = state.PatchMod.Weapons.GetOrAddAsOverride(weapon);
+                    if (weaponPatch.Keywords != null)
+                    {
+                        weaponPatch.Keywords.Add(SPIKEWeapElvenBlade);
+                        weaponCount++;
+                    }
+                }
+
+                //Elven Sword
+                if (weapon != null && weapon.HasKeyword(Skyrim.Keyword.WeapMaterialElven) && weapon.HasKeyword(Skyrim.Keyword.WeapTypeSword))
+                {
+                    var weaponPatch = state.PatchMod.Weapons.GetOrAddAsOverride(weapon);
+                    if (weaponPatch.Keywords != null)
+                    {
+                        weaponPatch.Keywords.Add(SPIKEWeapElvenBlade);
+                        weaponCount++;
+                    }
+                }
+
+
+                //Iron Dagger
+                if (weapon != null && weapon.HasKeyword(Skyrim.Keyword.WeapMaterialIron) && weapon.HasKeyword(Skyrim.Keyword.WeapTypeDagger))
+                {
+                    var weaponPatch = state.PatchMod.Weapons.GetOrAddAsOverride(weapon);
+                    if (weaponPatch.Keywords != null)
+                    {
+                        weaponPatch.Keywords.Add(SPIKEWeapIronSword);
+                        weaponPatch.Keywords.Add(SPIKEWeapPigsticker);
+                        weaponCount++;
+                    }
+                }
+
+                //Iron Greatsword
+                if (weapon != null && weapon.HasKeyword(Skyrim.Keyword.WeapMaterialIron) && weapon.HasKeyword(Skyrim.Keyword.WeapTypeGreatsword))
+                {
+                    var weaponPatch = state.PatchMod.Weapons.GetOrAddAsOverride(weapon);
+                    if (weaponPatch.Keywords != null)
+                    {
+                        weaponPatch.Keywords.Add(SPIKEWeapIronSword);
+                        weaponCount++;
+                    }
+                }
+
+                //Iron Sword
+                if (weapon!= null && weapon.HasKeyword(Skyrim.Keyword.WeapMaterialIron) && weapon.HasKeyword(Skyrim.Keyword.WeapTypeSword))
+                {
+                    var weaponPatch = state.PatchMod.Weapons.GetOrAddAsOverride(weapon);
+                    if (weaponPatch.Keywords != null)
+                    {
+                        weaponPatch.Keywords.Add(SPIKEWeapIronSword);
+                        weaponPatch.Keywords.Add(SPIKEWeapPigsticker);
+                        weaponCount++;
+                    }
+                }
+
+                //Special Weapons
+                if (weapon != null && (weapon.FormKey.Equals(Dragonborn.Weapon.DLC2MKMiraakSword1) || weapon.FormKey.Equals(Dragonborn.Weapon.DLC2MKMiraakSword2) || weapon.FormKey.Equals(Dragonborn.Weapon.DLC2MKMiraakSword3)))
+                {
+                    var weaponPatch = state.PatchMod.Weapons.GetOrAddAsOverride(weapon);
+                    if (weaponPatch.Keywords != null)
+                    {
+                        weaponPatch.Keywords.Add(SPIKEWeapFoul);
+                        weaponCount++;
+                    }
+                }
+
+
+            }
+            Console.WriteLine(weaponCount + " Weapons Patched");
         }
     }
 }
