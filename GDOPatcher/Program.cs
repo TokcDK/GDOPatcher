@@ -11,7 +11,7 @@ namespace GDOPatcher
     {
         private static readonly ModKey KeyGDO = ModKey.FromNameAndExtension("Guard Dialogue Overhaul.esp");
         private static readonly ModKey KeyUpdate = ModKey.FromNameAndExtension("Update.esm");
-        private static readonly ModKey KeyRequiem = ModKey.FromNameAndExtension("Requiem.esp");
+        // private static readonly ModKey KeyRequiem = ModKey.FromNameAndExtension("Requiem.esp");
 
 
         public static readonly FormLink<IKeywordGetter> SPIKEArmorAssassin = new(KeyUpdate.MakeFormKey(0xDA0101));
@@ -82,9 +82,9 @@ namespace GDOPatcher
             var GDOESP = state.LoadOrder.GetIfEnabled(KeyGDO);
             var armorCount = 0;
             var weaponCount = 0;
-            var RequiemESP = state.LoadOrder.GetIfEnabled(KeyRequiem);
+            // var RequiemESP = state.LoadOrder.GetIfEnabled(KeyRequiem);
             if (GDOESP.Mod == null) return;
-            if (RequiemESP.Mod != null) Console.WriteLine("Requiem is is installed, patching additional armor sets");
+            // if (RequiemESP.Mod != null) Console.WriteLine("Requiem is is installed, patching additional armor sets");
 
 
             foreach (var armor in state.LoadOrder.PriorityOrder.OnlyEnabled().Armor().WinningOverrides())
@@ -101,7 +101,7 @@ namespace GDOPatcher
                 if (armor != null && (armor.HasKeyword(SPIKEArmorAssassin) || armor.HasKeyword(SPIKEArmorBrigand) || armor.HasKeyword(SPIKEArmorDragonBone) || armor.HasKeyword(SPIKEArmorDragonScale) || armor.HasKeyword(SPIKEArmorDwarven) || armor.HasKeyword(SPIKEArmorEbony) || armor.HasKeyword(SPIKEArmorFancyBlack) || armor.HasKeyword(SPIKEArmorImperial) || armor.HasKeyword(SPIKEArmorImperialScout) || armor.HasKeyword(SPIKEArmorImperialSecurity) || armor.HasKeyword(SPIKEArmorIron) || armor.HasKeyword(SPIKEArmorLeather) || armor.HasKeyword(SPIKEArmorMerc) || armor.HasKeyword(SPIKEArmorOrcish) || armor.HasKeyword(SPIKEArmorScaleShiny) || armor.HasKeyword(SPIKEArmorSons) || armor.HasKeyword(SPIKEArmorSonsBear) || armor.HasKeyword(SPIKEArmorSteel) || armor.HasKeyword(SPIKEArmorSteelPlate) || armor.HasKeyword(SPIKEArmorStinksDeath) || armor.HasKeyword(SPIKEArmorThievesGuild) || armor.HasKeyword(SPIKEArmorTrueNord) || armor.HasKeyword(SPIKEArmorWeak) || armor.HasKeyword(SPIKEGodsBlessings) || armor.HasKeyword(SPIKEGodsPraised) || armor.HasKeyword(SPIKEImperialAuxiliary) || armor.HasKeyword(SPIKEImperialLegate) || armor.HasKeyword(SPIKEImperialPraefect) || armor.HasKeyword(SPIKEImperialQuaestor) || armor.HasKeyword(SPIKEImperialTribune) || armor.HasKeyword(SPIKERedguardMerc) || armor.HasKeyword(SPIKEShieldFancyDwarven) || armor.HasKeyword(SPIKESonsBoneBreaker) || armor.HasKeyword(SPIKESonsIceVeins) || armor.HasKeyword(SPIKESonsSnowHammer) || armor.HasKeyword(SPIKESonsStormblade) || armor.HasKeyword(SPIKESonsUnblooded) || armor.HasKeyword(SPIKEStaffHorror) || armor.HasKeyword(SPIKEWeapBigHammer) || armor.HasKeyword(SPIKEWeapElvenBlade) || armor.HasKeyword(SPIKEWeapFancySwordBlack) || armor.HasKeyword(SPIKEWeapFoul) || armor.HasKeyword(SPIKEWeapIronSword) || armor.HasKeyword(SPIKEWeapKillerBlade) || armor.HasKeyword(SPIKEWeapPigsticker) || armor.HasKeyword(SPIKEWeapScaryMace) || armor.HasKeyword(SPIKEWeapSteelSword) || armor.HasKeyword(SPIKEWeapWickedAxe))) continue;
 
                 //Aetherium
-                if (RequiemESP.Mod != null)
+                /*if (RequiemESP.Mod != null)
                 {
                     FormLink<IKeywordGetter> REQ_ArmorSet_Aetherium = new(KeyRequiem.MakeFormKey(0xAD39BD));
                     if (armor != null && armor.HasKeyword(REQ_ArmorSet_Aetherium))
@@ -146,7 +146,7 @@ namespace GDOPatcher
                             armorCount++;
                         }
                     }
-                }
+                }*/
 
                 //Dark Brotherhood Armor
                 if (armor != null && armor.HasKeyword(Skyrim.Keyword.ArmorDarkBrotherhood.FormKey))
@@ -257,7 +257,7 @@ namespace GDOPatcher
                 }
 
                 //Fur
-                if (RequiemESP.Mod != null)
+                /*if (RequiemESP.Mod != null)
                 {
                     FormLink<IKeywordGetter> REQ_ArmorSet_Fur = new(KeyRequiem.MakeFormKey(0xAD3ADE));
                     if (armor != null && armor.HasKeyword(REQ_ArmorSet_Fur))
@@ -270,7 +270,7 @@ namespace GDOPatcher
                             armorCount++;
                         }
                     }
-                }
+                }*/
 
                 //Hide Armor
                 if (armor != null && armor.HasKeyword(Skyrim.Keyword.ArmorMaterialHide.FormKey) && !armor.HasKeyword(Skyrim.Keyword.ArmorMaterialScaled))
@@ -285,7 +285,7 @@ namespace GDOPatcher
                 }
 
                 //Imperial Legate
-                if (RequiemESP.Mod != null)
+                /*if (RequiemESP.Mod != null)
                 {
                     FormLink<IKeywordGetter> REQ_ArmorSet_ImperialLegate = new(KeyRequiem.MakeFormKey(0xAD39C5));
                     if (armor != null && armor.HasKeyword(REQ_ArmorSet_ImperialLegate))
@@ -298,7 +298,7 @@ namespace GDOPatcher
                             armorCount++;
                         }
                     }
-                }
+                }*/
 
                 //Imperial Heavy Armor
                 if (armor != null && armor.HasKeyword(Skyrim.Keyword.ArmorMaterialImperialHeavy.FormKey))
@@ -385,7 +385,7 @@ namespace GDOPatcher
                 }
 
                 //Redguard
-                if (RequiemESP.Mod != null)
+                /*if (RequiemESP.Mod != null)
                 {
                     FormLink<IKeywordGetter> REQ_ArmorSet_Hammerfell = new(KeyRequiem.MakeFormKey(0xAD39C2));
                     if (armor != null && armor.HasKeyword(REQ_ArmorSet_Hammerfell))
@@ -398,9 +398,9 @@ namespace GDOPatcher
                             armorCount++;
                         }
                     }
-                }
-                else
-                {
+                }*/
+                //else
+                //{
                     if (armor != null && (armor.NamedFieldsContain("Redguard") || armor.NamedFieldsContain("Hammerfell") || armor.NamedFieldsContain("Alik'r")))
                     {
 
@@ -411,7 +411,7 @@ namespace GDOPatcher
                             armorCount++;
                         }
                     }
-                }
+                //}
                 //Scaled armor
                 if (armor != null && armor.HasKeyword(Skyrim.Keyword.ArmorMaterialScaled.FormKey))
                 {
@@ -510,7 +510,7 @@ namespace GDOPatcher
                 }
 
                 //Wolf
-                if (RequiemESP.Mod != null)
+                /*if (RequiemESP.Mod != null)
                 {
                     FormLink<IKeywordGetter> REQ_ArmorSet_Wolf = new(KeyRequiem.MakeFormKey(0xAD3A3F));
                     if (armor != null && armor.HasKeyword(REQ_ArmorSet_Wolf))
@@ -523,7 +523,7 @@ namespace GDOPatcher
                             armorCount++;
                         }
                     }
-                }
+                }*/
 
                 //Special Cases
                 //Non Vampire Lord Armor
