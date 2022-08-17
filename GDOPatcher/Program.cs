@@ -72,7 +72,7 @@ namespace GDOPatcher
                 .AddPatch<ISkyrimMod, ISkyrimModGetter>(RunPatch)
                 .SetTypicalOpen(GameRelease.SkyrimSE, "GDOPatcher.esp").AddRunnabilityCheck(state =>
                 {
-                    state.LoadOrder.AssertHasMod(KeyGDO, true, "\n\nGuard Dialogue Overhaul.esp missing!\n\n");
+                    state.LoadOrder.AssertListsMod(KeyGDO, "\n\nGuard Dialogue Overhaul.esp missing!\n\n");
                 })
                 .Run(args);
         }
